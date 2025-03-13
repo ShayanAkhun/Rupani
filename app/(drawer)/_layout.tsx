@@ -35,6 +35,13 @@ function DrawerLayout() {
             title: "Parental",
           }}
         />
+        <Drawer.Screen
+          name="profile"
+          options={{
+            drawerLabel: "Profile",
+            title: "Profile",
+          }}
+        />
       </Drawer>
     </GestureHandlerRootView>
   );

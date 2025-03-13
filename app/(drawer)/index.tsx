@@ -2,17 +2,13 @@ import React, { useEffect, useState } from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useRouter } from "expo-router"; // Use Expo Router's useRouter
+import { useRouter } from "expo-router"; 
 
 export default function DashboardScreen() {
   const [username, setUsername] = useState("");
   const router = useRouter(); 
   
-    const handleLogout = async () => {
-      await AsyncStorage.removeItem("userToken"); 
-      router.replace("/(auth)/Login"); 
-    };
-
+ 
   useEffect(() => {
     const fetchUsername = async () => {
       const storedUsername = await AsyncStorage.getItem("user");
@@ -32,11 +28,6 @@ export default function DashboardScreen() {
           <Text style={styles.buttonText}>Maternal</Text>
         </TouchableOpacity>
       </View>
-
-
-      <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
-        <Text style={styles.logoutText}>Logout</Text>
-      </TouchableOpacity>
     </View>
   );
 }
@@ -89,19 +80,5 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "bold",
   },
-  logoutButton: {
-    position: "absolute",
-    bottom: 20,
-    left: 20,
-    right: 20,
-    backgroundColor: "red",
-    padding: 15,
-    borderRadius: 10,
-    alignItems: "center",
-  },
-  logoutText: {
-    color: "white",
-    fontSize: 16,
-    fontWeight: "bold",
-  },
+
 });

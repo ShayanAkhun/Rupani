@@ -19,6 +19,7 @@ const useSignUpAuthStore = create<AuthState>((set) => ({
   user: null,
   isLoading: true,
 
+  // Load logged-in user from AsyncStorage
   loadUser: async () => {
     try {
       const userData = await AsyncStorage.getItem("user");
@@ -32,35 +33,60 @@ const useSignUpAuthStore = create<AuthState>((set) => ({
     }
   },
 
+  // Login function: Find user in AsyncStorage
   login: async (email: string, password: string) => {
     try {
-      const storedUser = await AsyncStorage.getItem(email);
+      const usersData = await AsyncStorage.getItem("users");
+      const users: User[] = usersData ? JSON.parse(usersData) : [];
 
-      if (storedUser) {
-        const user: User = JSON.parse(storedUser);
-        await AsyncStorage.setItem("user", JSON.stringify(user));
-        set({ user });
-      } else {
+      // Find user by email
+      const foundUser = users.find((user) => user.email === email);
+
+      if (!foundUser) {
         console.error("User not found. Please register first.");
+        return;
       }
+
+      // Save logged-in user separately
+      await AsyncStorage.setItem("user", JSON.stringify(foundUser));
+
+      // Update Zustand state
+      set({ user: foundUser });
     } catch (error) {
       console.error("Login failed:", error);
     }
   },
 
+  // Register function: Save user into the users array
   register: async (name: string, email: string, password: string) => {
     try {
+      const usersData = await AsyncStorage.getItem("users");
+      const users: User[] = usersData ? JSON.parse(usersData) : [];
+
+      // Check if user already exists
+      if (users.some((user) => user.email === email)) {
+        console.error("User already exists!");
+        return;
+      }
+
+      // Create new user object
       const newUser: User = { email, name };
 
-      await AsyncStorage.setItem(email, JSON.stringify(newUser));
+      // Add user to list and save
+      users.push(newUser);
+      await AsyncStorage.setItem("users", JSON.stringify(users));
+
+      // Auto-login the user after registration
       await AsyncStorage.setItem("user", JSON.stringify(newUser));
 
+      // Update Zustand state
       set({ user: newUser });
     } catch (error) {
       console.error("Registration failed:", error);
     }
   },
 
+  // Logout function: Remove current logged-in user
   logout: async () => {
     try {
       await AsyncStorage.removeItem("user");

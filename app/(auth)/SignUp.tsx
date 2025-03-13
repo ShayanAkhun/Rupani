@@ -13,7 +13,6 @@ export default function SignUpScreen() {
     const [loading, setLoading] = useState(false);
 
     const { register } = useSignUpAuthStore();
-    const navigation = useNavigation();
 
     const handleSignUp = async () => {
         if (!name || !email || !password) {
@@ -28,10 +27,7 @@ export default function SignUpScreen() {
             Alert.alert("Success", "Account created successfully!", [
                 { 
                     text: "OK", 
-                    onPress: () => navigation.reset({
-                        index: 0,
-                        routes: [{ name: "LoginScreen" }],
-                    })
+                    onPress: () => router.replace("/(auth)/Login")
                 }
             ]);
         } catch (error) {
