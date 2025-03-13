@@ -1,29 +1,35 @@
 import { Drawer } from "expo-router/drawer";
-import "react-native-gesture-handler"
+import "react-native-gesture-handler";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { useRouter } from "expo-router";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import useLoginAuthStore from "@/store/LoginStore";
 
 function DrawerLayout() {
-  return (
-    <GestureHandlerRootView>
+  const { logout, user } = useLoginAuthStore()
 
+  return (
+    
+    <GestureHandlerRootView style={{ flex: 1 }}>
       <Drawer>
         <Drawer.Screen
           name="index"
           options={{
             drawerLabel: "Dashboard",
-            title: "Dashboard",
+            title: `Welcome, ${user?.name || "Guest"}`,
           }}
         />
 
         <Drawer.Screen
-          name="Maternal"
+          name="maternal"
           options={{
             drawerLabel: "Maternal",
             title: "Maternal",
           }}
         />
+
         <Drawer.Screen
-          name="Parental"
+          name="parental"
           options={{
             drawerLabel: "Parental",
             title: "Parental",
@@ -31,8 +37,8 @@ function DrawerLayout() {
         />
       </Drawer>
     </GestureHandlerRootView>
-
   );
 }
 
-export default DrawerLayout
+
+export default DrawerLayout;

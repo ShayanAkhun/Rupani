@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { 
     View, Text, TextInput, TouchableOpacity, StyleSheet, Alert 
 } from "react-native";
+import { router } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import useLoginAuthStore from "@/store/LoginStore";
@@ -21,10 +22,7 @@ export default function LoginScreen() {
 
         try {
             await login(email, password);
-            navigation.reset({
-                index: 0,
-                routes: [{ name: "Drawer" }],
-            });
+            router.replace("/(drawer)");
         } catch (error) {
             Alert.alert("Error", "Login failed. Please try again.");
         }
@@ -78,7 +76,7 @@ export default function LoginScreen() {
            
             <View style={styles.signUpContainer}>
                 <Text style={styles.signUpText}>Don't have an account? </Text>
-                <TouchableOpacity onPress={() => navigation.navigate("SignUpScreen")}>
+                <TouchableOpacity onPress={() => router.push("/(auth)/SignUp")}>
                     <Text style={styles.signUpLink}>Sign Up</Text>
                 </TouchableOpacity>
             </View>

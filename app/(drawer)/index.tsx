@@ -7,6 +7,11 @@ import { useRouter } from "expo-router"; // Use Expo Router's useRouter
 export default function DashboardScreen() {
   const [username, setUsername] = useState("");
   const router = useRouter(); 
+  
+    const handleLogout = async () => {
+      await AsyncStorage.removeItem("userToken"); 
+      router.replace("/(auth)/Login"); 
+    };
 
   useEffect(() => {
     const fetchUsername = async () => {
@@ -27,6 +32,11 @@ export default function DashboardScreen() {
           <Text style={styles.buttonText}>Maternal</Text>
         </TouchableOpacity>
       </View>
+
+
+      <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
+        <Text style={styles.logoutText}>Logout</Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -75,6 +85,21 @@ const styles = StyleSheet.create({
     shadowRadius: 2,
   },
   buttonText: {
+    color: "white",
+    fontSize: 16,
+    fontWeight: "bold",
+  },
+  logoutButton: {
+    position: "absolute",
+    bottom: 20,
+    left: 20,
+    right: 20,
+    backgroundColor: "red",
+    padding: 15,
+    borderRadius: 10,
+    alignItems: "center",
+  },
+  logoutText: {
     color: "white",
     fontSize: 16,
     fontWeight: "bold",

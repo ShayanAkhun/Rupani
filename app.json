@@ -28,7 +28,6 @@
         "expo-splash-screen",
         {
           "image": "./assets/images/splash-icon-dark.png",
-          "text" : "Agah e Waledain",
           "imageWidth": 200,
           "resizeMode": "contain",
           "backgroundColor": "#ffffff",

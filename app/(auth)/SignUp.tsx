@@ -5,7 +5,7 @@ import {
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import useSignUpAuthStore from "@/store/SignupStore";
-
+import { router } from "expo-router";
 export default function SignUpScreen() {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
@@ -89,7 +89,7 @@ export default function SignUpScreen() {
 
             <View style={styles.loginContainer}>
                 <Text style={styles.loginText}>Already have an account? </Text>
-                <TouchableOpacity onPress={() => navigation.navigate("LoginScreen")}>
+                <TouchableOpacity onPress={() => router.push("/(auth)/Login")}>
                     <Text style={styles.loginLink}>Login</Text>
                 </TouchableOpacity>
             </View>

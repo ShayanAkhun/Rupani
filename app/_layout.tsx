@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { Stack, Slot, Redirect } from "expo-router";
+import { Stack, Redirect } from "expo-router";
 
 export default function RootLayout() {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean | null>(null);
@@ -10,16 +10,26 @@ export default function RootLayout() {
       const userToken = await AsyncStorage.getItem("userToken");
       setIsLoggedIn(!!userToken);
     };
+
     checkLogin();
   }, []);
 
+  // Prevent flashing of an empty screen until login status is checked
   if (isLoggedIn === null) {
-    return <Slot />; // 🔥 Ensure Slot is always rendered
+    return null;
   }
 
   return (
-    <Stack screenOptions={{ headerShown: false }}>
-      {isLoggedIn ? <Slot /> : <Redirect href="/(auth)/Login" />} 
-    </Stack>
+    <>
+     
+      {!isLoggedIn && <Redirect href="/(auth)/Login" />}
+
+     
+      <Stack screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="(auth)/Login" />
+        <Stack.Screen name="(auth)/SignUp" />
+        <Stack.Screen name="(drawer)" />
+      </Stack>
+    </>
   );
 }
