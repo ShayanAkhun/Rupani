@@ -1,54 +1,112 @@
 import React from "react";
-import { View, Text, ScrollView } from "react-native";
+import { View, Text, ScrollView, StyleSheet } from "react-native";
 
 const Parental = () => {
   return (
-    <ScrollView className="flex-1 bg-blue-50 px-4 py-6">
+    <ScrollView style={styles.container}>
       
-      <View className="bg-blue-600 p-6 rounded-xl shadow-lg">
-        <Text className="text-white text-2xl font-bold text-center">
-          Parenting Advice 🌿
-        </Text>
-        <Text className="text-blue-100 text-center mt-2">
+      <View style={styles.header}>
+        <Text style={styles.headerTitle}>Parenting Advice 🌿</Text>
+        <Text style={styles.headerSubtitle}>
           "Children learn more from what you are than what you teach."  
           — W.E.B. Du Bois
         </Text>
       </View>
 
       
-      <View className="mt-6 bg-white p-5 rounded-lg shadow-md">
-        <Text className="text-xl font-semibold text-gray-800">
-          5 Golden Rules of Parenting:
-        </Text>
+      <View style={styles.card}>
+        <Text style={styles.cardTitle}>5 Golden Rules of Parenting:</Text>
 
-        <View className="mt-3">
-          <Text className="text-gray-700 mt-2">
-            ✅ **Lead by Example** - Children imitate what they see.  
-          </Text>
-          <Text className="text-gray-700 mt-2">
-            ✅ **Encourage Open Communication** - Let kids express themselves.  
-          </Text>
-          <Text className="text-gray-700 mt-2">
-            ✅ **Be Patient & Understanding** - Every child is unique.  
-          </Text>
-          <Text className="text-gray-700 mt-2">
-            ✅ **Teach by Actions, Not Just Words** - Show love & respect.  
-          </Text>
-          <Text className="text-gray-700 mt-2">
-            ✅ **Spend Quality Time** - Create lifelong memories together.  
-          </Text>
+        <View style={styles.list}>
+          <Text style={styles.listItem}>✅ <Text style={styles.boldText}>Lead by Example</Text> - Children imitate what they see.</Text>
+          <Text style={styles.listItem}>✅ <Text style={styles.boldText}>Encourage Open Communication</Text> - Let kids express themselves.</Text>
+          <Text style={styles.listItem}>✅ <Text style={styles.boldText}>Be Patient & Understanding</Text> - Every child is unique.</Text>
+          <Text style={styles.listItem}>✅ <Text style={styles.boldText}>Teach by Actions, Not Just Words</Text> - Show love & respect.</Text>
+          <Text style={styles.listItem}>✅ <Text style={styles.boldText}>Spend Quality Time</Text> - Create lifelong memories together.</Text>
         </View>
       </View>
 
-     
-      <View className="mt-6 bg-blue-500 p-4 rounded-lg shadow-lg">
-        <Text className="text-white text-center text-lg">
+      
+      <View style={styles.quoteCard}>
+        <Text style={styles.quoteText}>
           "A parent's love is whole no matter how many times divided."  
           — Robert Brault
         </Text>
       </View>
+
     </ScrollView>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#EFF6FF", 
+    paddingHorizontal: 16,
+    paddingVertical: 24,
+  },
+  header: {
+    backgroundColor: "#2563EB",
+    padding: 20,
+    borderRadius: 15,
+    shadowColor: "#000",
+    shadowOpacity: 0.2,
+    shadowRadius: 5,
+    elevation: 5,
+  },
+  headerTitle: {
+    fontSize: 22,
+    fontWeight: "bold",
+    color: "#FFFFFF",
+    textAlign: "center",
+  },
+  headerSubtitle: {
+    color: "#D6E4FF",
+    textAlign: "center",
+    marginTop: 8,
+    fontStyle: "italic",
+  },
+  card: {
+    marginTop: 24,
+    backgroundColor: "#FFFFFF",
+    padding: 16,
+    borderRadius: 12,
+    shadowColor: "#000",
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 4,
+  },
+  cardTitle: {
+    fontSize: 18,
+    fontWeight: "bold",
+    color: "#374151",
+  },
+  list: {
+    marginTop: 12,
+  },
+  listItem: {
+    color: "#4B5563",
+    marginTop: 8,
+  },
+  boldText: {
+    fontWeight: "bold",
+  },
+  quoteCard: {
+    marginTop: 24,
+    backgroundColor: "#3B82F6",
+    padding: 12,
+    borderRadius: 12,
+    shadowColor: "#000",
+    shadowOpacity: 0.2,
+    shadowRadius: 5,
+    elevation: 5,
+  },
+  quoteText: {
+    color: "#FFFFFF",
+    textAlign: "center",
+    fontSize: 16,
+    fontStyle: "italic",
+  },
+});
 
 export default Parental;
